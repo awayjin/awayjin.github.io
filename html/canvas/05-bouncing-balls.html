@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ball-Color</title>
+  <style>
+    body {
+      background: #dddddd;
+    }
+
+    #canvas {
+      margin-left: 10px;
+      margin-top: 10px;
+      background: #ffffff;
+      border: thin solid #aaaaaa;
+    }
+
+    #glasspane {
+      position: absolute;
+      left: 50px;
+      top: 50px;
+      padding: 0px 20px 10px 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border: thin solid rgba(0, 0, 0, 0.6);
+      color: #eeeeee;
+      font-family: Droid Sans, Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+      -webkit-box-shadow: rgba(0,0,0,0.5) 5px 5px 20px;
+      -moz-box-shadow: rgba(0,0,0,0.5) 5px 5px 20px;
+      box-shadow: rgba(0,0,0,0.5) 5px 5px 20px;
+    }
+
+    #glasspane h2 {
+      font-weight: normal;
+    }
+
+    #glasspane .title {
+      font-size: 2em;
+      color: rgba(255, 255, 0, 0.8);
+    }
+
+    #glasspane a:hover {
+      color: yellow;
+    }
+
+    #glasspane a {
+      text-decoration: none;
+      color: #cccccc;
+      font-size: 3.5em;
+    }
+
+    #glasspane p {
+      margin: 10px;
+      color: rgba(65, 65, 220, 1.0);
+      font-size: 12pt;
+      font-family: Palatino, Arial, Helvetica, sans-serif;
+    }
+  </style>
+</head>
+<body>
+<div id='glasspane'>
+  <h2 class='title'>Bouncing Balls</h2>
+
+  <p>One hundred balls bouncing</p>
+
+  <a id='startButton'>Start</a>
+</div>
+
+<canvas id='canvas' width='750' height='500'>
+  Canvas not supported
+</canvas>
+
+<script>
+  var context = document.getElementById('canvas').getContext('2d')
+  var startButton = document.getElementById('startButton')
+  var glasspane = document.getElementById('glasspane')
+  var paused = true
+  var circles = []
+
+  // 画网格
+  function drawGrid (context, color, stepx, stepy) {
+    context.strokeStyle = color
+    context.lineWidth = 0.5
+
+    // x
+    for (var i = stepx + 0.5; i < context.canvas.height; i += stepx) {
+      context.beginPath()
+      context.moveTo(0, i)
+      context.lineTo(context.canvas.width, i)
+      context.stroke()
+    }
+
+    // y
+    for (var i = stepy + 0.5; i < context.canvas.width; i += stepy) {
+      context.beginPath()
+      context.moveTo(i, 0)
+      context.lineTo(i, context.canvas.height)
+      context.stroke()
+    }
+  }
+  drawGrid(context, 'lightgray', 10, 10)
+
+  // 画球
+  !function drawBalls () {
+    context.lineWidth = 0.5
+    context.font = '32px Ariel'
+
+    // 100个球
+    for (var i = 0; i < 100; ++i) {
+      circles[i] = {
+        x: 100,
+        y: 300,
+        velocityX: Math.random() * 3,
+        velocityY: Math.random() * 3,
+        radius: Math.random() * 50,
+        color: 'rgba(' + (Math.random() * 255).toFixed(0) + ', ' +
+        (Math.random() * 255).toFixed(0) + ', ' +
+        (Math.random() * 255).toFixed(0) + ', 1.0'
+      }
+    }
+  }()
+
+  // 点击开始和暂停
+  startButton.addEventListener('click', function (event) {
+    paused = !paused
+    startButton.innerText = paused ? 'Start' : 'stop'
+  }, false)
+
+  // 绘制彩色球并移动
+  !function drawColorBall () {
+    // 回调的次数通常是每秒60次
+    window.requestAnimationFrame(drawColorBall) // requestAnimationFrame (请求帧动画) 执行更高效
+    if (!paused) {
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+      drawGrid(context, 'lightgray', 10, 10)
+
+      circles.forEach(function (circle) {
+        context.beginPath()
+        context.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2, false)
+        context.fillStyle = circle.color
+        context.fill()
+        adjustPosition(circle)
+      })
+    }
+  }()
+
+  // setInterval(function () {
+    // drawColorBall()
+    // 大多数显示器的刷新频率是60Hz
+    // 一秒之内进行60次重新渲染，每次重新渲染的时间不能超过16.66毫秒
+    // 1000 / 60 = 16.66 每次重新渲染的时间16.66毫秒
+  // }, 1000 / 60)
+
+  // 位置
+  function adjustPosition (circle) {
+    // 当达到最大宽度或到画布开始边界返回
+    if (circle.x + circle.velocityX + circle.radius > context.canvas.width ||
+     circle.x + circle.velocityX - circle.radius < 0 ) {
+      circle.velocityX = -circle.velocityX
+    }
+
+    // y
+    if (circle.y + circle.velocityY + circle.radius > context.canvas.height ||
+      circle.y + circle.velocityY - circle.radius < 0 ) {
+      circle.velocityY = -circle.velocityY
+    }
+
+    circle.x += circle.velocityX
+    circle.y += circle.velocityY
+  }
+
+</script>
+
+</body>
+</html>
