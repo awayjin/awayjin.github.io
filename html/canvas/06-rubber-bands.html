@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+
+</head>
+<body>
+<style>
+  body {
+    background: rgba(100, 145, 250, 0.3);
+  }
+
+  #canvas {
+    margin-left: 20px;
+    margin-right: 0;
+    margin-bottom: 20px;
+    border: thin solid #aaaaaa;
+    cursor: crosshair;
+    padding: 0;
+  }
+
+  #controls {
+    margin: 20px 0px 20px 20px;
+  }
+
+  #rubberbandDiv {
+    position: absolute;
+    border: 3px solid yellow;
+    cursor: crosshair;
+    display: none;
+  }
+
+</style>
+<div id='controls'>
+  <input type='button' id='resetButton' value='Reset'/>
+</div>
+
+<div id='rubberbandDiv'></div>
+
+<div class="pos"></div>
+<canvas id='canvas' width='800' height='520'>
+  Canvas not supported
+</canvas>
+
+
+<script>
+  var canvas = document.getElementById('canvas')
+  var context = canvas.getContext('2d')
+  var mousedown = {} // 鼠标按下对象，存放x、y坐标
+  var rubberbandRectangle = {} // 橡皮筋矩形图像对象，存放矩形图像top,left及矩形宽高
+  var rubberbandDiv = document.getElementById('rubberbandDiv') // 橡皮筋画出的矩形
+  var dragging = false
+
+  // 0-加载图像
+  var image = new Image()
+  image.src = '../shared/images/arch.png'
+  image.onload = function () {
+    drawImage()
+  }
+
+  // 2.1-start
+  function rubberbandStart (x, y) {
+    mousedown.x = x // 按下时x
+    mousedown.y = y // 按下时y
+
+    rubberbandRectangle.left = mousedown.x
+    rubberbandRectangle.top = mousedown.y
+
+    moveRubberbandDiv()
+    showRubberbandDiv()
+
+    dragging = true // 开始拖动鼠标
+  }
+
+  // 2.2-3.2 矩形开始位置top left
+  function moveRubberbandDiv () {
+    rubberbandDiv.style.top  = rubberbandRectangle.top  + 'px'
+    rubberbandDiv.style.left = rubberbandRectangle.left + 'px'
+  }
+
+  // 2.3-矩形显示-show
+  function showRubberbandDiv () {
+    rubberbandDiv.style.display = 'inline'
+  }
+
+  // 3.1-鼠标移动宽高及位置 left,top width,height
+  function rubberbandStretch (x, y) {
+    // 如果鼠标移动时坐标小于鼠标按下时坐标，取鼠标移动时坐标，否则取鼠标按下时坐标
+    // 如果大就取小
+    rubberbandRectangle.left = x < mousedown.x ? x : mousedown.x;
+    rubberbandRectangle.top  = y < mousedown.y ? y : mousedown.y;
+
+    rubberbandRectangle.width  = Math.abs(x - mousedown.x),
+    rubberbandRectangle.height = Math.abs(y - mousedown.y);
+
+    moveRubberbandDiv()
+    resizeRubberbandDiv()
+  }
+
+  // 3.3-设置橡皮擦Div的宽高
+  function resizeRubberbandDiv() {
+    rubberbandDiv.style.width  = rubberbandRectangle.width  + 'px';
+    rubberbandDiv.style.height = rubberbandRectangle.height + 'px';
+  }
+
+  // 4.1-鼠标释放时执行的函数
+  function rubberbandEnd () {
+    // 用于获得canvas元素的左，上，右和下分别相对浏览器视窗的位置
+    var bbox = canvas.getBoundingClientRect()
+
+    /**
+     * drawImage-有三种不同的参数组合
+     * 1. 三参数--要绘制的图像(传入img元素)，起点x和y坐标. 画布大小和原始大小都一样
+     * 2. 五参数--改变绘制后图像大小，在三参数后面多传入2参数. 目标宽度和目标高度
+     * 3. 九参数--要绘制的图像，
+     * 源图像的 x 坐标、源图像的 y 坐标、源图像的宽度、源图像的高度，
+     * 目标图像的 x 坐标、目标图像的 y 坐标、目标图像的宽度、目标图像的高度
+     **/
+    try {
+       context.drawImage(canvas,
+         rubberbandRectangle.left - bbox.left,
+         rubberbandRectangle.top - bbox.top,
+         rubberbandRectangle.width,
+         rubberbandRectangle.height,
+       0, 0, canvas.width, canvas.height)
+    } catch (e) {
+      // suppress error message when mouse is released
+      // outside the canvas
+    }
+
+    // 4.2-重置矩形存放图像
+    resetRubberbandRectangle()
+
+    // 4.3-设置橡皮擦div宽高为0
+    rubberbandDiv.style.width = 0;
+    rubberbandDiv.style.height = 0;
+
+    // 4.4-隐藏
+    hideRubberbandDiv();
+
+    dragging = false;
+  }
+
+  // 4.2 重置矩形
+  function resetRubberbandRectangle() {
+    rubberbandRectangle = { top: 0, left: 0, width: 0, height: 0 };
+  }
+
+  function showRubberbandDiv() {
+    rubberbandDiv.style.display = 'inline';
+  }
+
+  function hideRubberbandDiv() {
+    rubberbandDiv.style.display = 'none';
+  }
+
+
+  // 1-draw image
+  function drawImage () {
+    context.drawImage(image, 0, 0, canvas.width, canvas.height)
+  }
+
+  // 2-mousedown 按下鼠标时触发
+  canvas.onmousedown = function (e) {
+    // x--设置或获取鼠标指针位置相对于父文档的 x 像素坐标
+    // clientX--设置或获取鼠标指针位置相对于窗口客户区域的 x 坐标，其中客户区域不包括窗口自身的控件和滚动条
+    var x = e.x || e.clientX
+    var y = e.y || e.clientY
+
+    e.preventDefault()
+
+    var pos = document.querySelector('.pos')
+    pos.innerHTML = `(${e.x}, ${e.y})`
+    rubberbandStart(x, y)
+  }
+
+  // 3-鼠标按下移动时
+  window.onmousemove = function (e) {
+    var x = e.x || e.clientX
+    var y = e.y || e.clientY
+
+    if (dragging) {
+      rubberbandStretch(x, y)
+    }
+  }
+
+  // 4-鼠标释放
+  window.onmouseup = function (e) {
+    rubberbandEnd()
+  }
+
+  // 5-重置图像
+  resetButton.onclick = function(e) {
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+  };
+</script>
+
+</body>
+</html>
