@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Hello Hexo!demo">
+<meta name="description" content="TypeScript 基础部分数组元素类型后面接上[], 第二种方式是使用数组泛型，Array&amp;lt;元素类型&amp;gt;：1234// 数组let list: number[] = [1, 2]// 数组泛型let list2: Array&amp;lt;string&amp;gt; = [&apos;3&apos;] 元组 Tuple元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同.元组可以插入不能越界访问1234">
 <meta property="og:type" content="article">
-<meta property="og:title" content="my art">
-<meta property="og:url" content="http://yoursite.com/2018/05/30/my-art/index.html">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/09/27/00.base/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Hello Hexo!demo">
+<meta property="og:description" content="TypeScript 基础部分数组元素类型后面接上[], 第二种方式是使用数组泛型，Array&amp;lt;元素类型&amp;gt;：1234// 数组let list: number[] = [1, 2]// 数组泛型let list2: Array&amp;lt;string&amp;gt; = [&apos;3&apos;] 元组 Tuple元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同.元组可以插入不能越界访问1234">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T09:54:50.122Z">
+<meta property="og:updated_time" content="2019-09-27T03:21:23.676Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="my art">
-<meta name="twitter:description" content="Hello Hexo!demo">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="TypeScript 基础部分数组元素类型后面接上[], 第二种方式是使用数组泛型，Array&amp;lt;元素类型&amp;gt;：1234// 数组let list: number[] = [1, 2]// 数组泛型let list2: Array&amp;lt;string&amp;gt; = [&apos;3&apos;] 元组 Tuple元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同.元组可以插入不能越界访问1234">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/30/my-art/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/09/27/00.base/"/>
 
 
 
 
 
-  <title>my art | Hexo</title>
+  <title> | Hexo</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/my-art/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/27/00.base/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">my art</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T17:24:28+08:00">
-                2018-05-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-27T16:02:58+08:00">
+                2019-09-27
               </time>
             
 
@@ -299,8 +299,23 @@
       
 
       
-        <h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo!"></a>Hello Hexo!</h2><p>demo</p>
-
+        <h1 id="TypeScript-基础部分"><a href="#TypeScript-基础部分" class="headerlink" title="TypeScript 基础部分"></a>TypeScript 基础部分</h1><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>元素类型后面接上[], 第二种方式是使用数组泛型，Array&lt;元素类型&gt;：<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"><span class="keyword">let</span> list: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="comment">// 数组泛型</span></span><br><span class="line"><span class="keyword">let</span> list2: <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt; = [<span class="string">'3'</span>]</span><br></pre></td></tr></table></figure></p>
+<h2 id="元组-Tuple"><a href="#元组-Tuple" class="headerlink" title="元组 Tuple"></a>元组 Tuple</h2><p>元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同.<br>元组可以插入不能越界访问<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> tuple: [<span class="built_in">string</span>, <span class="built_in">number</span>]</span><br><span class="line"><span class="comment">// tuple = ['hello', 2]</span></span><br><span class="line">tuple = [<span class="string">'2'</span>, <span class="number">4</span>]</span><br><span class="line">tuple.push(<span class="number">33</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'tuple'</span>, tuple)</span><br></pre></td></tr></table></figure></p>
+<h2 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h2><p>枚举主要用来定义一些常量，比如请求URL、文本提示信息等等，<br>这样方便记忆，减少硬编码，增加可读性。</p>
+<ul>
+<li>数字枚举</li>
+<li>字符串枚举</li>
+<li>异构枚举</li>
+<li>枚举成员 - 只读属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// const.ts</span><br><span class="line">export enum URL &#123;</span><br><span class="line">  GET_CITY = &quot;/api/getCity&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// app.ts</span><br><span class="line">import &#123; URL &#125; from &quot;./const&quot;</span><br><span class="line">axios.get(URL.GET_CITY).then(function(resp) &#123;</span><br><span class="line">  // render city select</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 枚举类型</span><br><span class="line">enum E &#123;a, b&#125;</span><br><span class="line">enum F &#123;a = 2, b = 3&#125;</span><br><span class="line"></span><br><span class="line">let e: E = 33</span><br><span class="line">let f: F = 44</span><br></pre></td></tr></table></figure>
+<h2 id="接口-interface"><a href="#接口-interface" class="headerlink" title="接口(interface)"></a>接口(interface)</h2><p>TypeScript的核心原则之一是对值所具有的结构进行类型检查。<br>接口约束对象 函数 类的结构</p>
+<h3 id="对象类型接口"><a href="#对象类型接口" class="headerlink" title="对象类型接口"></a>对象类型接口</h3><ul>
+<li>类型断言用 值 as 类型 或者 &lt;类型&gt;值 的形式</li>
+<li>可选属性 通过？来设置, 只读属性通过 readonly</li>
+<li>当不确定接口中属性个数时需要使用 - 索引签名.<br>可索引类型具有一个索引签名，它描述了对象索引的类型，还有相应的索引返回值类型。</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 对象类型接口</span></span><br><span class="line"><span class="keyword">interface</span> List &#123;</span><br><span class="line">  readonly id: <span class="built_in">number</span>, <span class="comment">// 只读属性</span></span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">// age?: number; // 可选属性</span></span><br><span class="line">  <span class="comment">// 字符串索引签名, 用任意字符串来索引 List，这样 List 就支持多个属性了</span></span><br><span class="line">  [x: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -324,8 +339,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/30/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/09/27/how-long/" rel="next" title="how long">
+                <i class="fa fa-chevron-left"></i> how long
               </a>
             
           </div>
@@ -333,10 +348,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/24/bz/" rel="prev" title="bz">
-                bz <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -459,7 +470,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-Hexo"><span class="nav-number">1.</span> <span class="nav-text">Hello Hexo!</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TypeScript-基础部分"><span class="nav-number">1.</span> <span class="nav-text">TypeScript 基础部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">1.1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元组-Tuple"><span class="nav-number">1.2.</span> <span class="nav-text">元组 Tuple</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举类型"><span class="nav-number">1.3.</span> <span class="nav-text">枚举类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口-interface"><span class="nav-number">1.4.</span> <span class="nav-text">接口(interface)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象类型接口"><span class="nav-number">1.4.1.</span> <span class="nav-text">对象类型接口</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
